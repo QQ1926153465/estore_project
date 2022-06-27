@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.estore.dao.CustomerDao">
+    <sql id="customerSql">
+         CUSTOMERID, name,password, zipCode,address,telephone,email
+    </sql>
+
+    <insert id="register" parameterType="customer">
+        insert into ES_CUSTOMER(CUSTOMERID,NAME,PASSWORD,ZIPCODE,ADDRESS,TELEPHONE,EMAIL)
+        values (my_seq.nextval,#{name},#{password},#{zipCode},#{address},#{telephone},#{email})
+    </insert>
+    <select id="findByName" resultType="com.briup.estore.entity.Customer">
+        select <include refid="customerSql"/> from
+        ES_CUSTOMER
+        where NAME = #{name}
+    </select>
+</mapper>
